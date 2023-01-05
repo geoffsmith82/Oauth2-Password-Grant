@@ -23,7 +23,6 @@ type
     property AccessToken;
     property RefreshToken;
     property AccessTokenEndpoint;
-
   end;
 
 implementation
@@ -48,6 +47,9 @@ begin
     LRequest.AddAuthParameter('client_id', ClientID, TRESTRequestParameterKind.pkGETorPOST);
     LRequest.AddAuthParameter('client_secret', ClientSecret, TRESTRequestParameterKind.pkGETorPOST);
     LRequest.AddAuthParameter('grant_type', 'password', TRESTRequestParameterKind.pkGETorPOST);
+    if not Scope.IsEmpty then
+      LRequest.AddAuthParameter('scope', Scope, TRESTRequestParameterKind.pkGETorPOST);
+
 
     LRequest.Execute;
 
